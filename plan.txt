@@ -1,0 +1,17 @@
+Webpack (imports/exports)
+  Реализовать babel
+  SCSS
+  Eslint
+  2 Modes
+    Dev mode
+      Dev server (hot reload during development)
+      SourceMaps (указывает на модули, где вели разработку)
+      Eslint (чтобы в едином стиле разрабатывать)
+      Not minified JS & CSS
+    Prod mode
+      Minified code
+Git
+  Production
+    1.0.0
+  development
+    1.0.2
