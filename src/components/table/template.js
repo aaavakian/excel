@@ -1,24 +1,33 @@
 const CODES = {
-  'A': 65,
-  'Z': 90
+  A: 65,
+  Z: 90
 };
 
 function toChar(_, index) {
   return String.fromCharCode(CODES.A + index);
 }
 
-function toColumn(col) {
-  return `<div class="column">${col}</div>`;
-}
-
-function toCell(content = '') {
-  return `<div class="cell" contenteditable>${content}</div>`;
-}
-
-function createRow(number, content = '') {
+function toColumn(col, index) {
   return `
-    <div class="row">
-      <div class="row-info">${number || ''}</div>
+    <div class="column" data-type="resizable" data-col="${index}">
+      ${col}
+      <div class="col-resize" data-resize="col"></div>
+    </div>
+  `;
+}
+
+function toCell(_, col) {
+  return `<div class="cell" contenteditable data-col="${col}"></div>`;
+}
+
+function createRow(num, content = '') {
+  const resize = num ? '<div class="row-resize" data-resize="row"></div>' : '';
+  return `
+    <div class="row" data-type="resizable">
+      <div class="row-info">
+        ${num || ''}
+        ${resize}
+      </div>
       <div class="row-data">${content}</div>
     </div>
   `;
