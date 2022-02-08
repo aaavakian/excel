@@ -10,7 +10,7 @@ export class Table extends ExcelComponent {
     super($root, {
       // Добавляем одно событие на корневой элемент, чтобы для каждой ячейки
       // не делать этого. Это оптимизация, делегирование
-      listeners: ['mousedown', 'mouseup']
+      listeners: ['mousedown']
     });
   }
 
