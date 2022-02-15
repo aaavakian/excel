@@ -129,5 +129,3 @@ $.create = (tagname, classes = '') => {
   }
   return $(el);
 };
-
-
