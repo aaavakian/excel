@@ -1,5 +1,7 @@
+import {clone} from './utils';
+
 export function createStore(rootReducer, initialState = {}) {
-  let state = rootReducer({...initialState}, {type: '__INIT__'});
+  let state = rootReducer(clone(initialState), {type: '__INIT__'});
   let listeners = [];
 
   return {
@@ -17,7 +19,7 @@ export function createStore(rootReducer, initialState = {}) {
     },
     getState() {
       // Чтобы полностью избежать мутирования (новый объект)
-      return JSON.parse(JSON.stringify(state));
+      return clone(state);
     }
   };
 }
