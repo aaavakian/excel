@@ -1,5 +1,5 @@
 import {$} from '@core/dom';
-import {createRecordsTable} from './functions';
+import {createRecordsTable} from './template';
 
 export class Dashboard {
   getRoot() {
@@ -12,7 +12,7 @@ export class Dashboard {
 
       <div class="db__new">
         <div class="db__view">
-          <a href="#excel/${now}" class="db__create">Новая таблица<br/></a>
+          <a href="#excel/${now}" class="db__create">New table<br/></a>
         </div>
       </div>
 

@@ -100,7 +100,7 @@ class DOM {
   }
 
   attr(name, value) {
-    if (value) {
+    if (value !== 'undefined') {
       this.$el.setAttribute(name, value);
       return this;
     }

@@ -12,6 +12,12 @@ function getAllKeys() {
   return keys;
 }
 
+function sortByDate(a, b) {
+  const dateA = new Date(storage(a).openedDate);
+  const dateB = new Date(storage(b).openedDate);
+  return dateB.getTime() - dateA.getTime();
+}
+
 function toHTML(key) {
   const state = storage(key);
 
@@ -30,17 +36,17 @@ export function createRecordsTable() {
   const keys = getAllKeys();
 
   if (!keys.length) {
-    return `<p>Вы пока не создали ни одной таблицы</p>`;
+    return `<p>You haven't created any tables yet</p>`;
   }
 
   return `
     <div class="db__list-header">
-      <span>Название</span>
-      <span>Дата открытия</span>
+      <span>Name</span>
+      <span>Last opened</span>
     </div>
 
     <ul class="db__list">
-    ${keys.map(toHTML).join('')}
+    ${keys.sort(sortByDate).map(toHTML).join('')}
     </ul>
   `;
 }

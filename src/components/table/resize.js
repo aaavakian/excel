@@ -3,14 +3,14 @@ import {$} from '@core/dom';
 export function resizeHandler($root, event) {
   return new Promise(resolve => {
     const $resizer = $(event.target);
-    // Не берем parent, используем атрибут, чтобы было меньше связи с View
+    // Use closes with the attribute, so there is no tight coupling with View
     const $parent = $resizer.closest('[data-type="resizable"]');
     const coords = $parent.getCoords();
     const type = $resizer.data.resize;
     const lineProp = type === 'col' ? 'bottom' : 'right';
     let value;
 
-    // Всегда показываем resizer и сделаем его длиннее
+    // Always show resizer and make it longer
     $resizer.css({opacity: 1, [lineProp]: '-5000px'});
 
     document.onmousemove = e => {
