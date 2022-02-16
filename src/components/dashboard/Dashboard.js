@@ -1,5 +1,5 @@
 import {$} from '@core/dom';
-import {createRecordsTable} from './functions';
+import {createRecordsTable} from './template';
 
 export class Dashboard {
   getRoot() {

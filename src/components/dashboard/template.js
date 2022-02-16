@@ -12,6 +12,12 @@ function getAllKeys() {
   return keys;
 }
 
+function sortByDate(a, b) {
+  const dateA = new Date(storage(a).openedDate);
+  const dateB = new Date(storage(b).openedDate);
+  return dateB.getTime() - dateA.getTime();
+}
+
 function toHTML(key) {
   const state = storage(key);
 
@@ -40,7 +46,7 @@ export function createRecordsTable() {
     </div>
 
     <ul class="db__list">
-    ${keys.map(toHTML).join('')}
+    ${keys.sort(sortByDate).map(toHTML).join('')}
     </ul>
   `;
 }
