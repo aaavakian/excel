@@ -34,13 +34,7 @@ export class Table extends ExcelComponent {
   init() {
     super.init();
 
-    this.$on('formula:input', value => {
-      this.selection.current
-          .attr('data-value', value)
-          .text(parse(value));
-      this.updateTextInStore(value);
-    });
-
+    this.$on('formula:input', value => this.updateCellText(value));
     this.$on('formula:done', () => this.selection.current.focus());
 
     this.$on('toolbar:applyStyle', value => {
@@ -56,9 +50,21 @@ export class Table extends ExcelComponent {
   }
 
   selectCell($cell) {
+    if (this.selection.current) {
+      // Return if the cell is the same
+      if (this.selection.current.id() === $cell.id()) {
+        return;
+      }
+      // Update previous if exists
+      this.selection.current.text(parse(this.selection.current.data.value));
+    }
+
+    // Select new
     this.selection.select($cell);
     this.$emit('table:select', $cell);
-
+    // Update text to the data one
+    $cell.text($cell.data.value);
+    // Update styles
     const styles = $cell.getStyles(Object.keys(DEFAULT_STYLES));
     this.$dispatch(actions.changeStyles(styles));
   }
@@ -89,14 +95,11 @@ export class Table extends ExcelComponent {
   }
 
   onKeydown(event) {
-    const keys = [
-      'Tab', 'Enter', 'ArrowLeft',
-      'ArrowRight', 'ArrowDown', 'ArrowUp'
-    ];
-
+    const keys = ['Tab', 'Enter'];
+    const shiftKeys = ['ArrowLeft', 'ArrowRight', 'ArrowDown', 'ArrowUp'];
     const {key} = event;
 
-    if (keys.includes(key) && !event.shiftKey) {
+    if (keys.includes(key) || shiftKeys.includes(key) && event.shiftKey) {
       event.preventDefault();
       const id = this.selection.current.id(true);
       const $next = this.$root.find(nextSelector(key, id));
@@ -106,7 +109,12 @@ export class Table extends ExcelComponent {
     }
   }
 
-  updateTextInStore(value) {
+  updateCellText(value) {
+    // Update data and text
+    this.selection.current
+        .attr('data-value', value)
+        .text(value);
+    // Update in store
     this.$dispatch(actions.changeText({
       id: this.selection.current.id(),
       value: value
@@ -115,6 +123,6 @@ export class Table extends ExcelComponent {
 
   onInput(event) {
     // this.$emit('table:input', $(event.target));
-    this.updateTextInStore($(event.target).text());
+    this.updateCellText($(event.target).text());
   }
 }
