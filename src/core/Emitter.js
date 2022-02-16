@@ -3,7 +3,7 @@ export class Emitter {
     this.listeners = {};
   }
 
-  // Уведомляем слушателей, если они есть
+  // Notify listeners if there are any
   emit(event, ...args) {
     if (!Array.isArray(this.listeners[event])) {
       return false;
@@ -13,13 +13,13 @@ export class Emitter {
     return true;
   }
 
-  // Подписываемся на уведомления
-  // Добавляем нового слушателя
+  // Subscribe to notifications
+  // Add new listener
   subscribe(event, callback) {
     this.listeners[event] = this.listeners[event] || [];
     this.listeners[event].push(callback);
 
-    // Для очистки
+    // For cleaning
     return () => {
       this.listeners[event] = this.listeners[event]
           .filter(listener => listener !== callback);

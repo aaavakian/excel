@@ -13,7 +13,7 @@ export class ExcelComponent extends DOMListener {
     this.prepare();
   }
 
-  // Настраиваем наш компонент до init
+  // Configure component before init
   prepare() {}
 
   // Returns component template
@@ -21,18 +21,18 @@ export class ExcelComponent extends DOMListener {
     return '';
   }
 
-  // Инициализируем компонент
-  // Добавляем DOM слушателей
+  // Init component
+  // Add DOM listeners
   init() {
     this.initDOMListeners();
   }
 
-  // Уведомляем слушателей про событие event
+  // Notify listeners about event
   $emit(event, ...args) {
     this.emitter.emit(event, ...args);
   }
 
-  // Подписываемся на событие event
+  // Subscribe to event
   $on(event, fn) {
     const unsub = this.emitter.subscribe(event, fn);
     this.unsubscribers.push(unsub);
@@ -42,15 +42,15 @@ export class ExcelComponent extends DOMListener {
     this.store.dispatch(action);
   }
 
-  // Приходят изменения по полям, на которые подписались
+  // Recieve changes from state properties that were subscribed on
   $storeChanged() {}
 
   isWatching(key) {
     return this.subscribe.includes(key);
   }
 
-  // Удаляем компонент
-  // Чистим слушателей
+  // Delete component
+  // Clear listeners
   destroy() {
     this.removeDOMListeners();
     this.unsubscribers.forEach(unsub => unsub());

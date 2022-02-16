@@ -17,7 +17,7 @@ export class Header extends ExcelComponent {
   }
 
   prepare() {
-    // Пример оптимизации для onInput
+    // Optimization example for input
     this.onInput = debounce(this.onInput.bind(this), 300);
   }
 
@@ -46,7 +46,7 @@ export class Header extends ExcelComponent {
     const $target = $(event.target);
 
     if ($target.data.button === 'remove') {
-      const decision = confirm('Вы точно хотите удалить эту таблицу?');
+      const decision = confirm('Are you sure to delete this table?');
       if (decision) {
         localStorage.removeItem(`excel:${ActiveRoute.param}`);
         ActiveRoute.navigate('');

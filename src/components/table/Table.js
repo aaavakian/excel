@@ -16,8 +16,8 @@ export class Table extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      // Добавляем одно событие на корневой элемент, чтобы для каждой ячейки
-      // не делать этого. Это оптимизация, делегирование
+      // Add one event handler for the root
+      // Optimization, so we don't handle each cell event
       listeners: ['mousedown', 'keydown', 'input'],
       ...options
     });
@@ -44,7 +44,7 @@ export class Table extends ExcelComponent {
       }));
     });
 
-    // Выбор ячейки по умолчанию
+    // Select the default cell
     const $cell = this.$root.find('[data-id="0:0"]');
     this.selectCell($cell);
   }
@@ -79,7 +79,7 @@ export class Table extends ExcelComponent {
   }
 
   onMousedown(event) {
-    // Получение атрибутов data-...
+    // Work with data-... attributes
     if (shouldResize(event)) {
       this.resizeTable(event);
     } else if (isCell(event)) {

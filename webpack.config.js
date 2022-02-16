@@ -21,7 +21,7 @@ const jsLoaders = () => {
   }
 
   return loaders;
-}
+};
 
 const plugins = () => {
   const base = [

@@ -20,7 +20,7 @@ describe('Router:', () => {
     router = new Router($root, {
       dashboard: DashboardPage,
       excel: ExcelPage
-    })
+    });
   });
 
   test('should be defined', () => {

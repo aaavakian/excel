@@ -18,7 +18,7 @@ export function createStore(rootReducer, initialState = {}) {
       listeners.forEach(listener => listener(state));
     },
     getState() {
-      // Чтобы полностью избежать мутирования (новый объект)
+      // Create new object so mutations are impossible
       return clone(state);
     }
   };
