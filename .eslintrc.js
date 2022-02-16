@@ -3,7 +3,8 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es6: true
+    es6: true,
+    "jest/globals": true
   },
   extends: ['eslint:recommended', 'google'],
   rules: {
@@ -11,5 +12,6 @@ module.exports = {
     'require-jsdoc': 'off',
     'arrow-parens': 'off',
     'operator-linebreak': 'off'
-  }
+  },
+  plugins: ['jest']
 };

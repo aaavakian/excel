@@ -1,5 +1,5 @@
-import {Page} from '@core/Page';
-import {createStore} from '@core/createStore';
+import {Page} from '@core/routes/Page';
+import {createStore} from '@core/store/createStore';
 import {debounce, storage} from '@core/utils';
 import {Excel} from '@/components/excel/Excel';
 import {Header} from '@/components/header/Header';

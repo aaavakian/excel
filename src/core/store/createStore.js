@@ -1,4 +1,4 @@
-import {clone} from './utils';
+import {clone} from '@core/utils';
 
 export function createStore(rootReducer, initialState = {}) {
   let state = rootReducer(clone(initialState), {type: '__INIT__'});
